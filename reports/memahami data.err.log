@@ -1,0 +1,30 @@
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/usr/local/lib/python3.10/dist-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/usr/local/lib/python3.10/dist-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+df_1 = _deepnote_execute_sql('select * from iris where species = \'iris-setosa\'', 'SQL_17297E53_5B5E_4BF6_BFBD_C13253D38AFB', audit_sql_comment='', sql_cache_mode='cache_disabled')
+df_1
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m<ipython-input-1-efb847a7dcad>[0m in [0;36m<cell line: 1>[0;34m()[0m
+[0;32m----> 1[0;31m [0mdf_1[0m [0;34m=[0m [0m_deepnote_execute_sql[0m[0;34m([0m[0;34m'select * from iris where species = \'iris-setosa\''[0m[0;34m,[0m [0;34m'SQL_17297E53_5B5E_4BF6_BFBD_C13253D38AFB'[0m[0;34m,[0m [0maudit_sql_comment[0m[0;34m=[0m[0;34m''[0m[0;34m,[0m [0msql_cache_mode[0m[0;34m=[0m[0;34m'cache_disabled'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0mdf_1[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name '_deepnote_execute_sql' is not defined
+
