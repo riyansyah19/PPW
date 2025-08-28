@@ -273,6 +273,28 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
+<!-- AUDIO PLAYER (floating button) -->
+<button id="audioToggle"
+        class="btn btn-sm rounded-pill"
+        title="Putar musik"
+        aria-pressed="false"
+        style="position: fixed; right: 1rem; bottom: 1rem; z-index: 9999; box-shadow: 0 6px 20px rgba(0,0,0,.15);">
+  <i class="fa-solid fa-play"></i> <span class="d-none d-sm-inline"> Music</span>
+</button>
+
+<div id="audioPanel"
+     style="position: fixed; right: 1rem; bottom: 3.5rem; z-index: 9999; background: var(--pst-color-on-surface, #fff); border-radius: 14px; padding: .75rem 1rem; box-shadow: 0 6px 20px rgba(0,0,0,.15); display: none;">
+  <div style="display:flex; align-items:center; gap:.75rem; min-width: 220px;">
+    <span style="font-size:.9rem;">Volume</span>
+    <input id="audioVolume" type="range" min="0" max="1" step="0.01" value="0.6" style="flex:1;">
+  </div>
+</div>
+
+<audio id="bgAudio"
+       preload="metadata"
+       src="_static/audio/lagu.mp3"
+       loop
+       crossorigin="anonymous"></audio>
 
 
 
@@ -533,7 +555,68 @@ By Muhammad Muhtar Riyansyah-220411100140
       </main>
     </div>
   </div>
-  
+
+	  <script>
+(function () {
+  const audio = document.getElementById('bgAudio');
+  const btn   = document.getElementById('audioToggle');
+  const icon  = btn.querySelector('i');
+  const panel = document.getElementById('audioPanel');
+  const vol   = document.getElementById('audioVolume');
+
+  // Set volume awal
+  audio.volume = parseFloat(vol.value || 0.6);
+
+  function updateUI(playing) {
+    icon.classList.toggle('fa-play', !playing);
+    icon.classList.toggle('fa-pause', playing);
+    btn.setAttribute('aria-pressed', playing ? 'true' : 'false');
+    btn.title = playing ? 'Jeda musik' : 'Putar musik';
+  }
+
+  btn.addEventListener('click', async () => {
+    try {
+      if (audio.paused) {
+        await audio.play();
+        updateUI(true);
+        panel.style.display = 'block';
+      } else {
+        audio.pause();
+        updateUI(false);
+        panel.style.display = 'none';
+      }
+    } catch (e) {
+      console.warn('Gagal memutar audio (mungkin butuh interaksi pengguna):', e);
+    }
+  });
+
+  vol.addEventListener('input', () => {
+    audio.volume = parseFloat(vol.value || 0.6);
+  });
+
+  // Otomatis jeda saat tab tidak aktif
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && !audio.paused) {
+      audio.pause();
+      updateUI(false);
+      panel.style.display = 'none';
+    }
+  });
+
+  // Tutup panel jika klik di luar
+  document.addEventListener('click', (e) => {
+    if (!panel.contains(e.target) && e.target !== btn && !audio.paused) {
+      // biarkan panel tetap; jika ingin auto-hide saat klik luar, buka komentar baris di bawah
+      // panel.style.display = 'none';
+    }
+  });
+
+  // Sinkron UI jika user pakai kontrol sistem
+  audio.addEventListener('play',  () => updateUI(true));
+  audio.addEventListener('pause', () => updateUI(false));
+})();
+</script>
+
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
   <script src="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
 <script src="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
