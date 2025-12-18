@@ -1,1 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        Deploy aplikasi di Hugging Face diawali dengan melakukan pendaftaran atau login ke situs Hugging Face melalui https://huggingface.co
+. Setelah berhasil masuk, pengguna perlu menyiapkan proyek aplikasi secara lokal, yang umumnya terdiri dari file utama aplikasi seperti app.py, file requirements.txt yang berisi daftar library yang digunakan, file model hasil pelatihan (misalnya .pkl atau .joblib), serta file README.md sebagai deskripsi aplikasi. Struktur dan kelengkapan file ini sangat penting agar proses deployment dapat berjalan dengan baik.
 
+Selanjutnya, pengguna perlu memastikan bahwa seluruh dependensi yang digunakan dalam aplikasi telah dituliskan di dalam file requirements.txt. Library yang umum digunakan antara lain Flask, Gradio, Streamlit, scikit-learn, pandas, dan numpy. Kesamaan versi library dengan lingkungan saat pelatihan model sangat disarankan untuk menghindari error saat aplikasi dijalankan di server Hugging Face.
+
+Setelah proyek siap, langkah berikutnya adalah membuat Space baru di Hugging Face dengan memilih menu Create → New Space. Pada tahap ini, pengguna diminta mengisi nama Space, lisensi, serta memilih SDK atau framework yang digunakan, seperti Gradio atau Streamlit. Setelah Space berhasil dibuat, pengguna dapat mengunggah seluruh file proyek secara manual melalui fitur upload atau dengan menghubungkan repository menggunakan Git untuk memudahkan pengelolaan versi dan pembaruan aplikasi.
+
+Ketika file proyek telah berhasil diunggah atau di-push ke repository Space, Hugging Face secara otomatis akan menjalankan proses build dan deployment. Sistem akan menginstal semua dependensi yang tercantum dalam requirements.txt dan menjalankan file app.py. Proses ini dapat dipantau melalui tab Logs untuk memastikan tidak terjadi kesalahan. Jika tidak ditemukan error, aplikasi akan langsung aktif dan dapat diakses secara online.
+
+Aplikasi yang telah berhasil dideploy dapat diakses melalui URL Space Hugging Face dan digunakan sebagai demo publik, media presentasi proyek, maupun pendukung laporan atau tugas akhir. Apabila terdapat perubahan atau pengembangan lanjutan pada aplikasi, pengguna hanya perlu memperbarui file proyek dan melakukan commit serta push ulang, karena Hugging Face akan melakukan r
+    </div>
+</body>
+</html>
