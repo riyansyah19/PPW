@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    fetch("/partials/sidebar.html")
+    fetch("partials/sidebar.html")
         .then(response => {
             if (!response.ok) {
                 throw new Error("Sidebar gagal dimuat");
